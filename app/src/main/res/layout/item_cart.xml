@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+        <variable
+            name="item"
+            type="com.example.fakestore.data.model.CartsItem" />
+    </data>
+
+    <com.google.android.material.card.MaterialCardView
+        android:layout_width="match_parent"
+        android:layout_height="265dp"
+        android:layout_margin="@dimen/spacing_normal"
+        app:cardCornerRadius="@dimen/radius_medium">
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+            <ImageView
+                android:id="@+id/image_view_cover"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:foreground="@color/tertiary_60"
+                android:scaleType="fitXY"
+                android:background="@drawable/shopping_image"
+                tools:layout_editor_absoluteX="0dp"
+                tools:layout_editor_absoluteY="16dp"/>
+            <TextView
+                android:id="@+id/product_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="24dp"
+                android:layout_marginBottom="8dp"
+                android:fontFamily="@font/poppins"
+                android:textColor="#D6E2E8"
+                android:textSize="20sp"
+                app:formattedDate="@{item.date}"
+                app:layout_constraintBottom_toTopOf="@+id/product_price"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.024"
+                app:layout_constraintStart_toStartOf="parent"
+                tools:text="date" />
+            <TextView
+                android:id="@+id/product_price"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_marginBottom="20dp"
+                android:fontFamily="@font/poppins_medium_italic"
+                android:text="@{ item.products.size() > 0 ? String.valueOf(item.products) : `N/A`}"
+                android:textColor="#D6E2E8"
+                android:textSize="16sp"
+                app:layout_constraintBottom_toBottomOf="@id/image_view_cover"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.008"
+                app:layout_constraintStart_toEndOf="@+id/textView6"
+                tools:text="quantity" />
+            <TextView
+                android:id="@+id/textView6"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Quantity"
+                android:textColor="#D6E2E8"
+                android:textSize="16sp"
+                app:layout_constraintBottom_toBottomOf="@+id/product_price"
+                app:layout_constraintStart_toStartOf="@+id/product_name"
+                app:layout_constraintTop_toTopOf="@+id/product_price"
+                app:layout_constraintVertical_bias="0.0" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </com.google.android.material.card.MaterialCardView>
+</layout>

@@ -1,0 +1,143 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+    <variable
+        name="viewModel"
+        type="com.example.fakestore.ui.details.DetailsViewModel" />
+    </data>
+
+    <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+        android:id="@+id/swipe_refresh_layout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:onRefreshListener="@{() -> viewModel.getProductById()}"
+        app:isRefreshing="@{viewModel.isRefreshing}"
+        >
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/white"
+        android:orientation="vertical">
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/image_view_card"
+            android:layout_width="match_parent"
+            android:layout_height="280dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="16dp"
+            app:cardCornerRadius="@dimen/radius_medium"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <com.google.android.material.imageview.ShapeableImageView
+                android:id="@+id/image_view_details"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:foreground="@color/tertiary_10"
+                android:scaleType="fitCenter"
+                app:imageUrl="@{viewModel.product.toData().image}"
+                app:showWhenSuccess="@{viewModel.product}"
+                tools:srcCompat="@tools:sample/backgrounds/scenic" />
+        </androidx.cardview.widget.CardView>
+
+        <TextView
+            android:id="@+id/text_view_item_title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/spacing_medium"
+            android:fontFamily="@font/roboto_medium"
+            android:textColor="@color/tertiary_87"
+            android:textSize="@dimen/font_size_title_medium"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/image_view_card"
+            app:shortTitle="@{viewModel.product.toData().title}"
+            app:showWhenSuccess="@{viewModel.product}"
+            tools:text="T-Shirt" />
+
+        <TextView
+            android:id="@+id/text_view_item_desc"
+            android:layout_width="match_parent"
+            android:layout_height="120dp"
+            android:layout_margin="@dimen/spacing_medium"
+            android:layout_marginTop="80dp"
+            app:showWhenSuccess="@{viewModel.product}"
+            android:text="@{viewModel.product.toData().description}"
+            android:fontFamily="@font/roboto_condensed_regular"
+            android:textColor="@color/tertiary_38"
+            android:textSize="@dimen/font_size_title"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/text_view_item_title"
+            tools:text="sakafklsanfskafnsakfnasksakfnksasfsafsdsadasdasdasdasdasdasdasdasdadasdasdasdasqweqrqaffssafsaasfsasafssasfsafsafsfsasfasfsaffsafffasassafsafssfasffs" />
+
+        <ProgressBar
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:showWhenLoading="@{viewModel.product}"
+            android:indeterminate="true"
+            android:indeterminateTintMode="src_atop"
+            android:indeterminateTint="@color/primary"
+
+            />
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:showWhenError="@{viewModel.product}"
+            android:src="@drawable/baseline_error_24"
+            android:contentDescription="@string/error_image"/>
+
+
+        <TextView
+            android:id="@+id/creators_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="@dimen/spacing_medium"
+            android:fontFamily="@font/roboto_medium"
+            android:text="Price"
+            android:textColor="@color/tertiary_38"
+            android:textSize="@dimen/font_size_title_medium"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/button" />
+
+        <TextView
+            android:id="@+id/text_view_price"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="58dp"
+            android:fontFamily="@font/roboto_medium"
+            app:showWhenSuccess="@{viewModel.product}"
+            android:text="@{'$' + viewModel.product.toData().price.toString()}"
+            android:textSize="20sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="@+id/creators_title"
+            app:layout_constraintTop_toBottomOf="@+id/creators_title" />
+
+        <Button
+            android:id="@+id/button"
+            android:layout_width="220dp"
+            android:layout_height="56dp"
+            android:layout_marginEnd="16dp"
+            android:layout_marginBottom="60dp"
+            android:text="Add to Card"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
+</layout>

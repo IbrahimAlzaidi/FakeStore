@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/homeFragment">
+
+    <fragment
+        android:id="@+id/homeFragment"
+        android:name="com.example.fakestore.ui.home.HomeFragment"
+        android:label="Home Fragment"
+        tools:layout="@layout/fragment_home">
+        <action
+            android:id="@+id/action_homeFragment_to_detailsFragment"
+            app:destination="@id/detailsFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/detailsFragment"
+        android:name="com.example.fakestore.ui.details.DetailsFragment"
+        android:label="Details Fragment"
+        tools:layout="@layout/fragment_details"
+        >
+        <argument
+            android:name="itemId"
+            app:argType="integer" />
+    </fragment>
+    <fragment
+        android:id="@+id/profileFragment"
+        android:name="com.example.fakestore.ui.profile.ProfileFragment"
+        android:label="Profile Fragment"
+        tools:layout="@layout/fragment_profile" />
+    <fragment
+        android:id="@+id/categoryFragment"
+        android:name="com.example.fakestore.ui.category.CategoryFragment"
+        android:label="category Fragment"
+        tools:layout="@layout/fragment_category" >
+        <action
+            android:id="@+id/action_categoryFragment_to_detailsCategoryFragment"
+            app:destination="@id/detailsCategoryFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/detailsCategoryFragment"
+        android:name="com.example.fakestore.ui.categoryDetails.DetailsCategoryFragment"
+        tools:layout="@layout/fragment_details_category"
+        android:label="Details Category Fragment" >
+        <argument
+            android:name="category"
+            app:argType="string" />
+        <action
+            android:id="@+id/action_detailsCategoryFragment_to_detailsFragment"
+            app:destination="@id/detailsFragment" />
+    </fragment>
+</navigation>
